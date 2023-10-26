@@ -21,14 +21,14 @@ class todo:
                         time.sleep(1)
                     
         def wyswietl_zadania(self):
-                print("Oto twoje aktualne zadania:")
                 if not self.lista_zadan:
                             print("Twoja lista jest pusta")
                             
                 else:
-                    print(self.lista_zadan)
+                    for list in self.lista_zadan:
+                         print("Twoje zadania: ", list)
                     time.sleep(3)
-                    
+
                 nowe_zadanie = input("Czy chcesz coś dodać?")
                 match nowe_zadanie:
                                     case "tak":
@@ -45,11 +45,27 @@ class todo:
                 print("Wykonane / Nie wykonane")
 
         def zapisz_do_pliku(self):
-                print("Zapisuje do pliku")
+                if not self.lista_zadan:
+                            print("Twoja lista jest pusta")
+                            time.sleep(2)
+                            return
+                else:
+                        print("Zapisuje do pliku..")
+                        content= ",".join(self.lista_zadan)
+                        f = open("dane.txt", mode='w')
+                        f.writelines(content)
+                        f.close()
+
         
         def odczytaj(self):
-                print("Odczytuje plik...")
         
+                print("Odczytuje plik...")
+                with open("dane.txt", mode='r') as f:
+                        for line in f:
+                         print(line.strip())
+                f.close()
+                time.sleep(3)
+
         def wyjdz(self):
                 print("Do widzenia!")
                 exit()
