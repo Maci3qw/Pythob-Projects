@@ -8,19 +8,29 @@ class todo:
                 self.lista_zadan = [] 
 
         def dodaj_zadanie(self):
-                print("Dodajemy zadanie")
-                zadanie = input("Podaj zadanie: ")
-                self.lista_zadan.append(zadanie)
-                print("Pomyślnie dodano zadanie!")
-                time.sleep(1)
-
+                while True:
+                        print("Dodajemy zadanie")
+                        zadanie = input("Podaj zadanie: ")
+                        self.lista_zadan.append(zadanie)
+                        print("Pomyślnie dodano zadanie!")
+                        nastepne_zadanie = input("Chcesz dodać jeszcze jedno zadanie? (tak / nie)")
+                        if nastepne_zadanie != "tak":
+                                time.sleep(1)
+                                return
+                        print("Ponawiam dodawanie zadania..")       
+                        time.sleep(1)
+                    
         def wyswietl_zadania(self):
                 print("Oto twoje aktualne zadania:")
-                
                 if not self.lista_zadan:
                             print("Twoja lista jest pusta")
-                            nowe_zadanie = input("Czy chcesz coś dodać?")
-                            match nowe_zadanie:
+                            
+                else:
+                    print(self.lista_zadan)
+                    time.sleep(3)
+                    
+                nowe_zadanie = input("Czy chcesz coś dodać?")
+                match nowe_zadanie:
                                     case "tak":
                                             self.dodaj_zadanie()
                                             print("Przenoszę do sekcji dodawania zadań..")
@@ -29,10 +39,7 @@ class todo:
                                     case "nie":
                                             return
                                             
-                            time.sleep(2)
-                else:
-                    print(self.lista_zadan)
-                    time.sleep(2)
+                time.sleep(2)
 
         def oznaczanie(self):
                 print("Wykonane / Nie wykonane")
@@ -46,8 +53,11 @@ class todo:
         def wyjdz(self):
                 print("Do widzenia!")
                 exit()
+                
+my_todo = todo()
+
 while True:       
-    print("Witamy w programie Notes2024!")
+    print("\n\nWitamy w programie Notes2024!")
     print("----------")
     print("1: Dodaj zadanie" )
     print("2: Wyświetl liste zadań" )
@@ -58,8 +68,7 @@ while True:
     print("----------")
     question = input("Co byś chciał dzisiaj zrobić?") 
 
-    my_todo = todo()
-
+   
     match question:
             case "1":
                     my_todo.dodaj_zadanie()
